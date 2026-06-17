@@ -91,38 +91,49 @@ ESPN使用美东时间的日期，北京时间比美东时间早12小时。
 
 ## 数据获取
 
-### Step 1: 获取比赛
+**重要：使用 chrome-devtools-mcp 工具获取所有网页数据。**
 
-使用 `webfetch` 工具直接访问网页获取比赛信息：
+chrome-devtools-mcp 提供以下工具：
+- `navigate_page` - 导航到URL
+- `take_snapshot` - 获取页面DOM快照（推荐，结构化数据）
+- `take_screenshot` - 截图（用于视觉验证）
+- `evaluate_script` - 执行JavaScript提取数据
+- `new_page` - 打开新标签页
+- `wait_for` - 等待特定文本出现
+
+### Step 1: 获取比赛列表
+
+使用 chrome-devtools-mcp 获取ESPN比赛列表：
 
 ```
-# 方法1: ESPN (推荐，包含赔率)
-# 需要将北京时间转换为ESPN日期
-webfetch: https://www.espn.com/soccer/schedule/_/date/{YYYYMMDD}/league/fifa.world
+# 1. 打开新页面
+new_page: https://www.espn.com/soccer/schedule/_/date/{YYYYMMDD}/league/fifa.world
 
-# 方法2: FIFA官网 (备用)
-webfetch: https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/canadamexicousa2026/schedule
+# 2. 等待页面加载
+wait_for: ["MATCH"]
+
+# 3. 获取页面快照提取比赛数据
+take_snapshot
 ```
 
-**获取后过滤**：ESPN 返回的页面可能包含多天的比赛（Today、Tomorrow、+1D 等）。必须：
-1. 解析每场比赛的日期标签
-2. 只保留与目标日期匹配的比赛
-3. **排除所有 "+1D" 标签的比赛**（后天的比赛不需要）
+**过滤规则**：
+- 保留标记为 "Today"、"Tomorrow" 或目标日期的比赛
+- 排除标记为 "+1D" 的比赛
 
 ### Step 2: 获取比赛数据
 
-对每场比赛并行获取：
+对每场比赛使用 chrome-devtools-mcp 获取数据：
 
-| 数据 | 来源 | 用途 |
+| 数据 | 工具 | 用途 |
 |------|------|------|
-| 赔率 | oddsportal.com | 博彩赔率(25%) |
-| FIFA排名 | fifa.com | 排名(15%) |
-| 近期战绩 | transfermarkt.com | 状态(15%) |
-| 历史交锋 | transfermarkt.com | 交锋(10%) |
-| 阵容信息 | transfermarkt.com | 阵容(10%) |
-| 预选赛 | fifa.com | 表现(10%) |
+| 赔率 | navigate_page + take_snapshot | 博彩赔率(25%) |
+| FIFA排名 | evaluate_script | 排名(15%) |
+| 近期战绩 | navigate_page + take_snapshot | 状态(15%) |
+| 历史交锋 | navigate_page + take_snapshot | 交锋(10%) |
+| 阵容信息 | navigate_page + take_snapshot | 阵容(10%) |
+| 预选赛 | navigate_page + take_snapshot | 表现(10%) |
 
-详细URL和解析规则见 `references/data-sources.md`
+详细URL和JavaScript提取脚本见 `references/data-sources.md`
 
 ## 权重模型
 
