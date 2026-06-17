@@ -3,8 +3,6 @@ name: world-cup-predict
 description: "世界杯/足球比赛比分预测。当用户询问今天的比赛、预测比分、世界杯赛程、足球比赛预测时使用。"
 metadata:
   short-description: "2026世界杯比赛比分预测，基于多维度数据分析"
-  requires:
-    bins: ["curl"]
 ---
 
 # 世界杯比赛比分预测
@@ -95,13 +93,15 @@ ESPN使用美东时间的日期，北京时间比美东时间早12小时。
 
 ### Step 1: 获取比赛
 
-```bash
+使用 `webfetch` 工具直接访问网页获取比赛信息：
+
+```
 # 方法1: ESPN (推荐，包含赔率)
 # 需要将北京时间转换为ESPN日期
-curl -s "https://www.espn.com/soccer/schedule/_/date/{YYYYMMDD}/league/fifa.world" | head -200
+webfetch: https://www.espn.com/soccer/schedule/_/date/{YYYYMMDD}/league/fifa.world
 
 # 方法2: FIFA官网 (备用)
-curl -s "https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/canadamexicousa2026/schedule" | head -100
+webfetch: https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/canadamexicousa2026/schedule
 ```
 
 **获取后过滤**：ESPN 返回的页面可能包含多天的比赛（Today、Tomorrow、+1D 等）。必须：
