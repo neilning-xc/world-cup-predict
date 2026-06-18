@@ -1,0 +1,37 @@
+references/weight-model.md
+  s_c82788f3d837f7::t_d534fb01e81fa4 64,69,72,74
+  s_c82788f3d837f7::t_2bed4a3c2d0aa1 93-94
+  s_c82788f3d837f7::t_07fb808f9d8987 8,13,28-32,38,40-41,45
+README.md
+  s_c82788f3d837f7::t_41b63151782385 9-10
+  s_c82788f3d837f7::t_fc78cec5f62f8c 18-24
+  s_c82788f3d837f7::t_fe2d560541acfb 51,55-56,63-67
+  s_c82788f3d837f7::t_0df2588f19eb9e 99
+references/data-sources.md
+  s_c82788f3d837f7::t_b9a2173e301a0c 109
+  s_c82788f3d837f7::t_0d7e01dce5c605 3-4,6,8,13,29,35-36,43,45,47,49,52-54,61-70,76,78,80-82,84,86-87,90-91,96-98,100,102,105-106,111,113-115,117,119-120,122,125,130,140-142,144-160,162,169-170,172-173,175-176
+  s_c82788f3d837f7::t_897467e22001d1 94
+SKILL.md
+  s_c82788f3d837f7::t_917d75f6d23e1d 156,160-161
+  s_c82788f3d837f7::t_d9a7fe6bcb81e9 112-116
+  s_c82788f3d837f7::t_60dfb2397d0ed3 82-89
+  s_c82788f3d837f7::t_5202cc953bb237 186-191,198
+  s_c82788f3d837f7::t_7ac2996245b673 101-102,138,140-147
+  s_c82788f3d837f7::t_528349de78f503 31-35,38,42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.17-trip",
+  "base_commit_sha": "b9567f567dff00a8b95a22de9c64f2c9ef99af62",
+  "prompts": {},
+  "sessions": {
+    "s_c82788f3d837f7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "771c568c-876e-462b-9b61-e04d184c91ac",
+        "model": "gemini-3.1-pro"
+      },
+      "human_author": "NeilNing <xcning@trip.com>"
+    }
+  }
+}
